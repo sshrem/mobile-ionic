@@ -1,0 +1,55 @@
+<ion-view ng-controller="SearchDesignsCtrl">
+  <ion-nav-title class="ds-header-title">
+    {{title}}
+  </ion-nav-title>
+  <ion-content scroll="true">
+    <ion-list>
+      <div class="hebrew" ng-repeat="supp in suppliers">
+        <ion-item class="item-stable">
+          {{'choosesupplier' | translate}}
+        </ion-item>
+        <ion-item class="item-accordion design-select-option">
+          <div class="row" ng-repeat="pairSupp in suppliers">
+            <div class="col col-50" ng-repeat="supp in pairSupp">
+              <div class="icon-on-image-holder" ng-click="onSelectSupplier(supp.id)">
+                <cl-image public-id="{{supp.logo}}" format="png" quality="80">
+                  <cl-transformation height="100" width="100" crop="scale"/>
+                </cl-image>
+                <i class="material-icons icon-on-image" ng-show="isSupplierSelected(supp.id)">&#xE86C;</i>
+              </div>
+            </div>
+          </div>
+        </ion-item>
+      </div>
+    </ion-list>
+    <ion-list ng-show="isAnySupplierSelected()">
+      <div class="hebrew" ng-repeat="room in roomItemsToDisplay">
+        <ion-item class="item-stable"
+                  ng-click="toggleGroup(room)"
+                  ng-class="{active: isGroupShown(room)}">
+          <i class="icon" ng-class="isGroupShown(room) ? 'ion-minus' : 'ion-plus'"></i>
+          {{room.title | translate}}
+        </ion-item>
+        <ion-item class="item-accordion design-select-option" ng-show="isGroupShown(room)">
+          <div class="row" ng-repeat="pairItem in room.items">
+            <div class="col col-50" ng-repeat="item in pairItem">
+              <div class="icon-on-image-holder" ng-click="onSelectItem(room.roomId,item.offeringId)">
+                <cl-image public-id="{{item.imgCode}}" format="png" quality="80">
+                  <cl-transformation height="60" width="60" crop="thumb"/>
+                </cl-image>
+                <i class="material-icons icon-on-image" ng-show="isItemSelected(room.roomId,item.offeringId)">
+                  &#xE86C;</i>
+              </div>
+              <span class="design-select-option-caption">{{item.name}}</span>
+            </div>
+          </div>
+        </ion-item>
+      </div>
+    </ion-list>
+    <button class="button button-block button-positive designs-button"
+            ng-show="isAnySupplierSelected()"
+            ui-sref="designs({projectId: projectId,projectName: projectName, aptId: aptTmplId})">
+      {{'search' | translate}}
+    </button>
+  </ion-content>
+</ion-view>

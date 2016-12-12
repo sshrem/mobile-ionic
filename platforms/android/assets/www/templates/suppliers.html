@@ -1,0 +1,16 @@
+<ion-view ng-controller="SuppliersCtrl">
+  <ion-nav-title class="ds-header-title">
+    {{'suppliers' | translate}}
+  </ion-nav-title>
+  <ion-content>
+    <div class="supplier" ng-repeat="supplier in suppliers">
+      <div class="supplier-logo">
+        <cl-image public-id="{{supplier.logo}}" format="png" quality="80"
+                  ng-click="openSupplierPage(supplier.url,supplier.id)">
+          <cl-transformation width="{{Math.floor(width * 0.75)}}" crop="thumb" gravity="face"/>
+        </cl-image>
+      </div>
+      <hr>
+    </div>
+  </ion-content>
+</ion-view>

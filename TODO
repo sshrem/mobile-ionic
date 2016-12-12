@@ -1,0 +1,15 @@
+* Config per env
+* Play Store - design page
+* Automation Tests
+
+QA:
+
+* Login / Logout - User last login, user is/not logged to fb.
+* Screens
+* Requests to heroku
+* mixpanel & stats
+
+
+
+// TODO Future Versions
+* List of room filters should be loaded from server

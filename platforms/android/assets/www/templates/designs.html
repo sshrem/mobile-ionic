@@ -1,0 +1,49 @@
+<ion-view ng-controller="DesignsCtrl">
+  <ion-nav-title class="ds-header-title">
+    {{title}}
+  </ion-nav-title>
+  <ion-content scroll="true">
+    <div class="row designs-filter-holder bggreen hebrew">
+      <div class="col col-90">{{ 'present' | translate}}{{' ' + designs.length + ' '}}{{'outof' | translate}}
+        {{totalNumOfDesigns}}
+      </div>
+      <i class="material-icons" ui-sref="searchDesigns({projectId: projectId,projectName: projectName, aptId: aptTmplId})">&#xE152;</i>
+    </div>
+    </div>
+
+    <ion-scroll direction="y" style="max-height: 80vh;">
+      <div class="design-cards-wrapper">
+        <div class="card design-card hebrew" ng-repeat="design in designs">
+          <div class="item item-image">
+            <div class="icon-on-image-holder">
+              <cl-video public-id="{{design.imaging}}" preload="none">
+                <cl-video-transformation height="{{height}}" width="{{width}}" crop="fit"/>
+              </cl-video>
+              <i class="material-icons icon-on-image"
+                 ng-click="playVideo(design.title,design.id,design.imaging)">
+                &#xE039;</i>
+            </div>
+          </div>
+          <div class="item item-divider">
+            <div class="design-details-wrapper">
+              <cl-image class="designer-image" public-id="{{design.designerImage}}"
+                        quality="80"></cl-image>
+              <div class="design-details">
+                <span class="design-title">{{design.title}}</span>
+                <span class="designer-name">{{'designedby' |translate}} {{design.designerName}}</span>
+              </div>
+              <div class="design-actions">
+                <i class="material-icons design-details-icon"
+                   ui-sref="suppliers({'projectId': projectId, 'aptTmpl': aptTmplId, 'designId':design.id})"
+                   ng-click="recordViewSuppliers(design.id)">&#xE88F;</i>
+                <i class="material-icons design-details-icon"
+                   ng-click="share(design.id,design.title,design.redirectUrl)">
+                  &#xE80D;</i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-scroll>
+  </ion-content>
+</ion-view>

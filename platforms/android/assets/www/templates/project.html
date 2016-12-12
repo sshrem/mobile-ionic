@@ -1,0 +1,76 @@
+<ion-view ng-controller="ProjectCtrl">
+  <ion-nav-title class="ds-header-title">
+    {{project.title}}
+  </ion-nav-title>
+  <ion-content scroll="false">
+    <div>
+      <cl-image class="project-image" public-id="{{project.image}}" quality="80">
+        <cl-transformation width="{{width}}" crop="scale"/>
+      </cl-image>
+    </div>
+    <div class="row tab-header-holder bggreen hebrew">
+      <a class="col col-33 tab-header" ng-class="{'tab-selected': tabToDisplay == 1}"
+         ng-click="changeTab(availableTabs.ABOUT,'ViewProjectAbout')">{{'about' | translate}}</a>
+      <a class="col col-33 tab-header" ng-class="{'tab-selected': tabToDisplay == 2}"
+         ng-click="changeTab(availableTabs.APARTMENT,'ViewProjectApartments')">{{'apartments' | translate}}</a>
+      <a class="col col-33 tab-header" ng-class="{'tab-selected': tabToDisplay == 3}"
+         ng-click="changeTab(availableTabs.FEATURES,'ViewProjectFeatures')">{{'features' | translate}}</a>
+    </div>
+
+    <ion-scroll direction="y" style="max-height: 60vh;">
+      <div class="project-tabs">
+        <div class="tab-about hebrew" ng-show="tabToDisplay == 1">
+          <div class="row">
+            <div class="col col-67">
+            <span class="project-detail-holder"><i class="material-icons project-detail-icon"
+                                                   ng-click="showCompanyAbout()">&#xE88E;</i><span
+              class="project-detail">{{project.entrepreneur.name}}</span></span>
+            <span class="project-detail-holder"><i class="material-icons project-detail-icon"
+                                                   ng-click="openWaze(project.lon,project.lat,project.code,'Sales Office')">&#xE531;</i><span
+              class="project-detail">{{project.location}}</span></span>
+            <span class="project-detail-holder"><a ng-href="tel:{{project.salesPhone}}"
+                                                   ng-click="registerEvent('CallSalesOffice',{'project': project.code})"><i
+              class="material-icons project-detail-icon">&#xE0B0;</i></a><span class="project-detail">{{project.salesPhone}}</span></span>
+            </div>
+            <div class="col col-33 project-logo-helper">
+              <cl-image class="project-logo" public-id="{{project.logo}}" quality="80"></cl-image>
+            </div>
+          </div>
+          <div ng-bind-html="project.about"></div>
+        </div>
+        <div class="tab-apartments hebrew" ng-show="tabToDisplay == 2">
+          <div ng-repeat="apartment in project.apartments">
+            <div class="card">
+              <div class="item item-divider bggreen">
+                {{apartment.name}}
+              </div>
+              <div class="item item-image">
+                <cl-image public-id="{{apartment.imgCode}}" format="png" quality="80"
+                          ui-sref="searchDesigns({projectId: projectId,projectName: project.title, aptId:{{apartment.id}}})"
+                          ng-click="registerEvent('OpenApartment', {'apartmentId':apartment.id})"></cl-image>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-features hebrew" ng-show="tabToDisplay == 3">
+          <div class="row" ng-repeat="feature in project.features">
+            <span class="feature-data"><i class="material-icons feature-icon">check</i>{{feature}}</span>
+          </div>
+        </div>
+      </div>
+    </ion-scroll>
+  </ion-content>
+
+
+  <script id="company-about-modal.html" type="text/ng-template">
+    <div class="modal hebrew" ng-click="closeCompanyAbout()">
+      <ion-content>
+        <cl-image class="company-logo" public-id="{{project.entrepreneur.logo}}" quality="80"></cl-image>
+        <hr>
+        <div class="company-about">
+          <span ng-bind-html="project.entrepreneur.about"></span>
+        </div>
+      </ion-content>
+    </div>
+  </script>
+</ion-view>

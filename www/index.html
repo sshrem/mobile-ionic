@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title></title>
+
+
+  <!-- compiled css output -->
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/ionic.app.min.css" rel="stylesheet">
+  <!--  -->
+
+  <!-- ionic/angularjs js -->
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <script src="lib/angular-i18n/angular-locale_he-il.js"></script>
+  <script src="lib/angular-dynamic-locale/dist/tmhDynamicLocale.min.js"></script>
+  <script src="lib/lodash/dist/lodash.min.js"></script>
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+  <script src="cordova.js"></script>
+
+  <!-- Angular -->
+  <script src="lib/angular-translate/angular-translate.min.js"></script>
+  <script src="lib/cloudinary-angular.js"></script>
+
+
+
+  <!-- your app's js -->
+  <script src="js/translations.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services/UserService.js"></script>
+  <script src="js/services/CacheService.js"></script>
+  <script src="js/services/BackendService.js"></script>
+  <script src="js/services/DesignsService.js"></script>
+  <script src="js/controllers/AuthenticationCtrl.js"></script>
+  <script src="js/controllers/ProjectCtrl.js"></script>
+  <script src="js/controllers/DesignsCtrl.js"></script>
+  <script src="js/controllers/SearchDesignsCtrl.js"></script>
+  <script src="js/controllers/DesignItemsCtrl.js"></script>
+  <script src="js/controllers/SuppliersCtrl.js"></script>
+  <script src="js/controllers/HelpCtrl.js"></script>
+  <!-- start Mixpanel -->
+  <script type="text/javascript">
+    (function(e, b) {
+      if (!b.__SV) {
+        var a, f, i, g;
+        window.mixpanel = b;
+        b._i = [];
+        b.init = function(a, e, d) {
+          function f(b, h) {
+            var a = h.split(".");
+            2 == a.length && (b = b[a[0]], h = a[1]);
+            b[h] = function() {
+              b.push([h].concat(Array.prototype.slice.call(arguments, 0)))
+            }
+          }
+          var c = b;
+          "undefined" !== typeof d ? c = b[d] = [] : d = "mixpanel";
+          c.people = c.people || [];
+          c.toString = function(b) {
+            var a = "mixpanel";
+            "mixpanel" !== d && (a += "." + d);
+            b || (a += " (stub)");
+            return a
+          };
+          c.people.toString = function() {
+            return c.toString(1) + ".people (stub)"
+          };
+          i =
+            "disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user"
+            .split(" ");
+          for (g = 0; g < i.length; g++) f(c, i[g]);
+          b._i.push([a, e, d])
+        };
+        b.__SV = 1.2;
+        a = e.createElement("script");
+        a.type = "text/javascript";
+        a.async = !0;
+        a.src = "undefined" !== typeof MIXPANEL_CUSTOM_LIB_URL ? MIXPANEL_CUSTOM_LIB_URL : "file:" === e.location.protocol && "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//) ? "https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js" :
+          "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";
+        f = e.getElementsByTagName("script")[0];
+        f.parentNode.insertBefore(a, f)
+      }
+    })(document, window.mixpanel || []);
+    mixpanel.init("106c6c549cb505191064f3caaa92062d");
+  </script>
+  <!-- end Mixpanel -->
+</head>
+
+<body ng-app="DisignStudio" ng-controller="AppController">
+
+  <ion-side-menus enable-menu-with-back-views="true">
+    <ion-side-menu side="right">
+      <ion-header-bar class="bggreen">
+        <h1 class="title ds-header-title">DisignStudio</h1>
+      </ion-header-bar>
+      <ion-content scroll="false">
+        <div class="user-profile">
+          <img class="profile-image" ng-src="{{userPicture}}" />
+          <span class="profile-name" ng-show="isLoggedIn == true">{{userName}}</span>
+        </div>
+        <ion-list class="menu-items">
+          <ion-item class="item-icon-right item-borderless hebrew" nav-clear menu-close ui-sref="project">
+            <i class="material-icons icon menu-item">domain</i>{{'sidemenuprojects' | translate}}
+          </ion-item>
+          <ion-item class="item-icon-right item-borderless hebrew" nav-clear menu-close ng-show="isLoggedIn == false" ui-sref="login">
+            <i class="icon ion-log-in menu-item"></i>{{'sidemenusignin' | translate}}
+          </ion-item>
+          <ion-item class="item-icon-right item-borderless hebrew" nav-clear menu-close ng-show="isLoggedIn == true" ui-sref="login">
+            <i class="icon ion-log-out menu-item"></i>{{'sidemenusignout' | translate}}
+          </ion-item>
+          <ion-item class="item-icon-right item-borderless hebrew" nav-clear menu-close ui-sref="help">
+            <i class="material-icons icon menu-item">&#xE8FD;</i>{{'sidemenuhelp' | translate}}
+          </ion-item>
+          <ion-item class="item-icon-right item-borderless hebrew" nav-clear menu-close ng-click="sendFeedback()">
+            <i class="material-icons icon menu-item">&#xE0E1;</i>{{'sidemenufeedback' | translate}}
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-side-menu>
+
+    <ion-side-menu-content>
+      <ion-nav-bar class="bggreen" align-title="center">
+        <ion-nav-back-button class="bggreen">
+
+        </ion-nav-back-button>
+        <ion-nav-buttons side="right">
+          <button menu-toggle="right" class="button button-icon icon ion-navicon">
+          </button>
+        </ion-nav-buttons>
+      </ion-nav-bar>
+      <ion-nav-view class="bggreen"></ion-nav-view>
+    </ion-side-menu-content>
+  </ion-side-menus>
+
+</body>
+
+</html>

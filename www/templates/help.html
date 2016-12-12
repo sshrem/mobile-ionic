@@ -1,0 +1,29 @@
+<ion-view ng-controller="HelpCtrl">
+  <ion-nav-title class="ds-header-title">
+    {{'help' | translate}}
+  </ion-nav-title>
+  <ion-content>
+    <div class="hebrew list">
+      <div class="item item-divider">
+        {{'helpmenuabout' | translate}}
+      </div>
+      <a class="item" ng-click="showHelpModal('privacy')">
+        {{'helpmenuprivacy' | translate}}
+      </a>
+      <a class="item" ng-click="showHelpModal('agreement')">
+        {{'helpmenuusage' | translate}}
+      </a>
+    </div>
+
+  </ion-content>
+
+  <script id="help-modal.html" type="text/ng-template">
+    <div class="modal hebrew" ng-click="closeHelpModal()">
+      <ion-content>
+        <div>
+          <span ng-bind-html="helpContent"></span>
+        </div>
+      </ion-content>
+    </div>
+  </script>
+</ion-view>

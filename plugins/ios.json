@@ -1,0 +1,27 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.disignstudio.app"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.disignstudio.app"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.disignstudio.app"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.disignstudio.app"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.disignstudio.app"
+        }
+    },
+    "dependent_plugins": {}
+}

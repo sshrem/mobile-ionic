@@ -1,0 +1,27 @@
+<ion-view ng-controller="AuthenticationCtrl">
+  <ion-nav-title class="ds-header-title">
+    DisignStudio
+  </ion-nav-title>
+  <ion-content>
+    <div class="user-profile">
+      <img class="profile-image" ng-src="{{userPicture}}"/>
+      <span class="profile-name">{{userName}}</span>
+    </div>
+    <hr>
+    <div class="login-holder">
+      <div ng-show="isLoggedIn == false">
+        <button class="button button-border icon-left ion-social-facebook button-positive login" ng-click="fbSignIn()">
+          Sign In
+        </button>
+        <div class="login-alert" ng-show="isLoggedIn == false">
+          <div>{{'signinprefix' | translate}}</div>
+          <div><a ui-sref="help">{{'signinsuffix' | translate}}</a></div>
+        </div>
+      </div>
+      <div ng-show="isLoggedIn == true">
+        <button class="button button-border icon-left ion-social-facebook button-positive login"
+                ng-click="fbSignOut()">Sign Out
+        </button>
+      </div>
+  </ion-content>
+</ion-view>
