@@ -77,6 +77,10 @@ angular.module('DisignStudio')
             $scope.designs = data.designs;
             $scope.title = data.title;
             $scope.totalNumOfDesigns = data.totalNumOfDesigns;
+
+            if ($scope.designs!= null && $scope.designs.length>0){
+              $scope.playVideo(designs[0].title,design.ids[0],design.imagings[0])
+            }
           }
         },
         'designs_' + $scope.projectId + '_' + $scope.aptTmplId
