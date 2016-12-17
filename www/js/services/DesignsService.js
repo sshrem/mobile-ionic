@@ -16,14 +16,13 @@ angular.module('DisignStudio')
 
     designsService.addOrRemoveFilter = function (roomId, offeringId) {
 
-      if (this.isFilterExist(roomId, offeringId)) {
-        _.remove(filters, {room: roomId, offer: offeringId})
-      } else {
-        filters.push({
-          room: roomId,
-          offer: offeringId
-        })
-      }
+      _.remove(filters, function(item){
+        return item.room == roomId;
+      }) ;
+      filters.push({
+        room: roomId,
+        offer: offeringId
+      })
     }
 
     designsService.isFilterExist = function (roomId, offeringId) {
