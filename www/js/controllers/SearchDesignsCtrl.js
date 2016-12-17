@@ -3,6 +3,8 @@ angular.module('DisignStudio')
 
     var initRequestUrl = 'http://' + $rootScope.domain + '/api/mobile/designsFilters';
 
+    $scope.isChecked = [true];
+    $scope.isItemChecked = [];
     $scope.suppliers = [];
     $scope.roomItems = [];
     $scope.roomItemsToDisplay = [];
@@ -45,7 +47,7 @@ angular.module('DisignStudio')
       }
 
       $scope.roomItems.forEach(function (group) {
-        group.show = false;
+        group.show = true;
       })
     }
 
@@ -72,7 +74,7 @@ angular.module('DisignStudio')
     }
 
     function init() {
-      
+
       var reqData = {
         projId: $scope.projectId,
         atId: $scope.aptTmplId
@@ -82,8 +84,21 @@ angular.module('DisignStudio')
         function (data) {
           if (data) {
             $scope.suppliers = _.chunk(data.suppliers, 2);
+            var supplierId = $scope.suppliers[0][0].id;
             $scope.roomItems = data.roomItems;
-            $scope.title = data.title;
+            $scope.onSelectSupplier(supplierId);
+            var index=0;
+            for (var key in $scope.roomItemsToDisplay){
+              var value=$scope.roomItemsToDisplay[key];
+              if (value.items !=null && value.items.length>0){
+                $scope.isItemChecked[index]=value.items[0][0].name;
+                $scope.onSelectItem(value.roomId, value.items[0][0].offeringId);
+              }
+
+              index++;
+            }
+
+           $scope.title = data.title;
           }
           $scope.filters = [];
         },
