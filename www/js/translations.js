@@ -25,7 +25,8 @@ var appTranslations = {
     "choosebedroomfloor": "Choose Bedroom Floor",
     "chooselivingroomfloor": "Choose Living Room & Kitchen Floor",
     "choosebathroomfloor": "Choose Bathroom Floor",
-    "choosebathroomcladding": "Choose Bathroom Cladding"
+    "choosebathroomcladding": "Choose Bathroom Cladding",
+    "visualization" : "Visualization"
 	},
 	"he": {
     "about": "אודות",
@@ -53,6 +54,7 @@ var appTranslations = {
     "choosebedroomfloor": "בחר ריצוף חדרי שינה" ,
     "chooselivingroomfloor": "בחר ריצוף סלון ומטבח",
     "choosebathroomfloor": "בחר ריצוף חדר אמבטיה",
-    "choosebathroomcladding": "בחר חיפויים לאמבטיה"
+    "choosebathroomcladding": "בחר חיפויים לאמבטיה",
+    "visualization": "הדמייה",
 	}
 }
